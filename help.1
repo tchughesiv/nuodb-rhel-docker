@@ -1,0 +1,25 @@
+.SH DESCRIPTION
+
+NuoDB's architecture consists of two services: Transaction Engines (TEs) and Storage Managers (SMs). The SM is responsible for providing data durability by writing the data to disk. The Community Edition (CE) container does not map volumes for persistent data. In this configuration, all data written to disk is automatically deleted when the container is shutdown.
+
+.PP
+This container image contains both the deploying script and the NuoDB containers. Setting the NODE_TYPE environment variable to "DEPLOY" will launch the NuoDB containers starting with the NuoDB Broker instance. The Broker's IP address is provided to the Storage Manager (SM) and Transaction Engine (TE) containers.
+
+.PP
+The required environment parameters are:
+
+.B --name  " - Name of the OpenShift application being deployed"
+.B -e OC_ADDRESS  " - The IP address of the master OpenShift node"
+.B -e USERNAME " - Username to login into OpenShift via oc CLI"
+.B -e PASSWORD " - Password to login into OpenShift via oc CLI"
+.B -e NODE_TYPE " - NODE_TYPE should be set to DEPLOY to launch all three NuoDB nodes at the same time."
+
+
+.SH Example
+
+oc new-app docker.io/nuodbopenshift/nuodb-deployer:latest \
+   --name nuodb-deployer \
+   -e "OC_ADDRESS=172.31.17.249" \
+   -e "USERNAME=developer"  \
+   -e "PASSWORD=developer" \
+   -e "NODE_TYPE=DEPLOY"

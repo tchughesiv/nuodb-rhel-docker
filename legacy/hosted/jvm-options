@@ -1,0 +1,8 @@
+
+# Custom properties file that injects known properties into the agent via JVM
+# command-line -D defintions.
+
+AGENT_PORT=${AGENT_PORT:-48004}
+PORT_RANGE=$((AGENT_PORT+1))
+AGENT_PEER=${AGENT_PEER:-''}
+NUODB_AGENT_JAVA_OPTS="-Dport=$AGENT_PORT -DdomainPassword=$DOMAIN_PASSWORD -Dpeer=$AGENT_PEER -DportRange=$PORT_RANGE"

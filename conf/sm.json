@@ -1,0 +1,31 @@
+{
+  "containerDefinitions": [
+    {
+      "name": "broker",
+      "image": "docker.io/nuodbopenshift/nuodb-ce-dev:latest",
+      "cpu": 10,
+      "memory": 4096,
+      "readonlyRootFilesystem": false,
+      "environment": [
+        {
+          "name": "AGENT_PORT",
+          "value": "48011"
+        },
+        {
+          "name": "BROKER_PORT",
+          "value": "48004"
+        },
+        {
+          "name": "NODE_PORT",
+          "value": "48010"
+        },
+        {
+          "name": "NODE_TYPE",
+          "value": "SM"
+        }
+      ],
+      "essential": true
+    }
+  ],
+  "family": "sm"
+}
